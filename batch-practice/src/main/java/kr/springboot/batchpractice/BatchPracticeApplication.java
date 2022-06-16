@@ -19,31 +19,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BatchPracticeApplication {
 
-    private final JobBuilderFactory jobBuilderFactory;
-
-    private final StepBuilderFactory stepBuilderFactory;
-
-    @Bean
-    public Step step() {
-
-        return this.stepBuilderFactory.get("step1")
-                .tasklet(new Tasklet() {
-                    @Override
-                    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                        System.out.println("Hello World");
-                        return RepeatStatus.FINISHED;
-                    }
-                }).build();
-
-    }
-
-    @Bean
-    public Job job() {
-        return this.jobBuilderFactory.get("job")
-                .start(step())
-                .build();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(BatchPracticeApplication.class, args);
     }
